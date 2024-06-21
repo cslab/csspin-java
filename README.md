@@ -1,5 +1,9 @@
-# spin_frontend
+# spin_java
 
-This repository contains the spin plugin-package spin_frontend. It provides the following spin-plugin:
+This repository contains the spin plugin-package spin_java. It provides the following spin-plugin:
 
--   spin_python.node (source: https://code.contact.de/qs/tooling/cs.spin/-/commit/a6cd9906504e9761a5b888add26dfe0d62809bd7)
+The following packages were copied from:
+https://code.contact.de/qs/tooling/cs.spin/-/commit/a6cd9906504e9761a5b888add26dfe0d62809bd7
+
+-   spin_python.java
+-   spin_python.mvn
