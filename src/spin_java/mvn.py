@@ -76,18 +76,18 @@ def init(cfg):
 def mvn(
     cfg,
     pom_file: option(
-        "-f",
-        "--file",
-        "pom_file",
+        "-f",  # noqa: F821
+        "--file",  # noqa: F821
+        "pom_file",  # noqa: F821
         show_default=(
-            "Force the use of an alternate POM file "  # noqa
+            "Force the use of an alternate POM file "  # noqa: F722
             "(or directory with pom.xml)"
         ),
     ),
     defines: option(
-        "-D",
-        "--define",
-        "defines",
+        "-D",  # noqa: F821
+        "--define",  # noqa: F821
+        "defines",  # noqa: F821
         multiple=True,
         show_default="Define a system property",  # noqa
     ),

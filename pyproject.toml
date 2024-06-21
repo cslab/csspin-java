@@ -3,15 +3,15 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools>=64", "setuptools_scm>=8"]
 
 [project]
-authors = [{ name = "CONTACT Software GmbH" }]
+authors = [{name = "CONTACT Software GmbH"}]
 dependencies = []
 description = "Plugin package for cs.spin providing Java related plugins"
 dynamic = ["version", "readme"]
-license = { text = "Copyright (C) 2024 CONTACT Software GmbH" }
+license = {text = "Copyright (C) 2024 CONTACT Software GmbH"}
 maintainers = [
-  { name = "Waleri Enns", email = "waleri.enns@contact-software.com" },
-  { name = "Benjamin Thomas Schwertfeger", email = "benjaminthomas.schwertfeger@contact-software.com" },
-  { name = "Fabian Hafer", email = "fabian.hafer@contact-software.com" },
+  {name = "Waleri Enns", email = "waleri.enns@contact-software.com"},
+  {name = "Benjamin Thomas Schwertfeger", email = "benjaminthomas.schwertfeger@contact-software.com"},
+  {name = "Fabian Hafer", email = "fabian.hafer@contact-software.com"}
 ]
 name = "spin_frontend"
 requires-python = ">=3.9"
@@ -107,7 +107,7 @@ disable = [
   "use-symbolic-message-instead",
   "wrong-import-order",
   "wrong-import-position",
-  "duplicate-code",
+  "duplicate-code"
 ]
 
 [tool.pylint.miscellaneous]
@@ -121,7 +121,7 @@ notes = ["FIXME", "XXX", "TODO", "TBC", "TBD"]
 score = "no"
 
 [tool.setuptools.dynamic]
-readme = { file = ["README.md"] }
+readme = {file = ["README.md"]}
 
 [tool.setuptools.package-data]
 spin_java = ["*_schema.yaml"]

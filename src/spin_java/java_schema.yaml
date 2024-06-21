@@ -3,15 +3,15 @@
 # Schema of the java plugin for cs.spin
 
 java:
-  type: object
-  help: Configuration regarding the java plugin for cs.spin
-  properties:
-    version:
-      type: str
-      help: Java version
-    install_dir:
-      type: path
-      help: The directory in which JAVA should be installed
-    java_home:
-      type: path
-      help: The path to the JAVA installation path
+    type: object
+    help: Configuration regarding the java plugin for cs.spin
+    properties:
+        version:
+            type: str
+            help: Java version
+        install_dir:
+            type: path
+            help: The directory in which JAVA should be installed
+        java_home:
+            type: path
+            help: The path to the JAVA installation path

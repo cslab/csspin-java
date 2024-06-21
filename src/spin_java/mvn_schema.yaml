@@ -3,49 +3,49 @@
 # Schema of the mvn plugin for cs.spin
 
 java:
-  type: object
-  help: Configuration regarding the mvn plugin for cs.spin
-  properties:
-    exe:
-      type: path
-      help: The mvn executable
-    version:
-      type: str
-      help: Java version
-    goals:
-      type: list
-      help: TODO
-    opts:
-      type: list
-      help: Options passed to the mvn call
-    defines:
-      type: object
-      help: TODO
-    pom_file:
-      type: path
-      help: TODO
-    packages:
-      type: list
-      help: TODO
-    mirrors:
-      type: list
-      help: List of mirrors to use when pulling packages
-    url:
-      type: str
-      help: URL pointing to the mvn binary
-    mavendir:
-      type: path
-      help: Directory to store caches
-    requires:
-      type: object
-      help: Dependencies of the mvn plugin
-      properties:
-        spin:
-          help: Spin dependencies of the mvn plugin
+    type: object
+    help: Configuration regarding the mvn plugin for cs.spin
+    properties:
+        exe:
+            type: path
+            help: The mvn executable
+        version:
+            type: str
+            help: Java version
+        goals:
+            type: list
+            help: TODO
+        opts:
+            type: list
+            help: Options passed to the mvn call
+        defines:
+            type: object
+            help: TODO
+        pom_file:
+            type: path
+            help: TODO
+        packages:
+            type: list
+            help: TODO
+        mirrors:
+            type: list
+            help: List of mirrors to use when pulling packages
+        url:
+            type: str
+            help: URL pointing to the mvn binary
+        mavendir:
+            type: path
+            help: Directory to store caches
+        requires:
+            type: object
+            help: Dependencies of the mvn plugin
+            properties:
+                spin:
+                    help: Spin dependencies of the mvn plugin
 
-    install_dir:
-      type: path
-      help: The directory in which JAVA should be installed
-    java_home:
-      type: path
-      help: The path to the JAVA installation path
+        install_dir:
+            type: path
+            help: The directory in which JAVA should be installed
+        java_home:
+            type: path
+            help: The path to the JAVA installation path
