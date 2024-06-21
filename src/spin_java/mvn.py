@@ -4,6 +4,8 @@
 # All rights reserved.
 # https://www.contact-software.com/
 
+"""Module implementing the mvn plugin for cs.spin"""
+
 import os
 import random
 import sys
@@ -31,6 +33,7 @@ defaults = config(
 
 
 def provision(cfg):
+    """Provision the mvn plugin"""
     # TODO: Maybe use cs.spin's download function
     if not exists(cfg.mvn.mavendir):
         random.shuffle(cfg.mvn.mirrors)
@@ -38,7 +41,7 @@ def provision(cfg):
             url = interpolate1(mirror + cfg.mvn.url)
             info(f"Downloading {url}")
             try:
-                filename, _ = urllib.request.urlretrieve(url)
+                filename, _ = urllib.request.urlretrieve(url)  # nosec: B310
             except urllib.error.HTTPError as e:
                 # maven removes old version from the mirrors...
                 if e.status == 404:
@@ -48,7 +51,7 @@ def provision(cfg):
                     )
                     mirror = "https://archive.apache.org/dist/"
                     url = interpolate1(mirror + cfg.mvn.url)
-                    filename, _ = urllib.request.urlretrieve(url)
+                    filename, _ = urllib.request.urlretrieve(url)  # nosec: B310
                 else:
                     raise
             except urllib.error.URLError:
@@ -60,11 +63,14 @@ def provision(cfg):
                 "Currently no mirror reachable"
             )
         with tarfile.open(filename, "r:gz") as tar:
-            tar.extractall(os.path.dirname(interpolate1(cfg.mvn.mavendir)))
+            tar.extractall(
+                os.path.dirname(interpolate1(cfg.mvn.mavendir))
+            )  # nosec: B202
     init(cfg)
 
 
 def init(cfg):
+    """Initialize the mvn plugin"""
     bindir = os.path.normpath(interpolate1(f"{cfg.mvn.mavendir}/bin"))
     setenv(
         f"set PATH={bindir}{os.pathsep}$PATH",

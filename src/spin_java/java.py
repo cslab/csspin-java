@@ -20,6 +20,7 @@ N = os.path.normcase
 
 
 def set_java_home(cfg):
+    """Extend the environment variables"""
     setenv(JAVA_HOME=cfg.java.java_home)
     setenv(
         N(f"set PATH=$JAVA_HOME/bin{os.pathsep}$PATH"),
@@ -28,6 +29,7 @@ def set_java_home(cfg):
 
 
 def check_java(cfg):
+    """Checks for a present java installation"""
     mkdir(cfg.java.install_dir)
     with memoizer(cfg.java.install_dir / "java.pickle") as m:
         version = None
@@ -40,6 +42,7 @@ def check_java(cfg):
 
 
 def provision(cfg):
+    """Provision the java plugin"""
     if check_java(cfg):
         return
 
@@ -81,6 +84,7 @@ def provision(cfg):
 
 
 def init(cfg):
+    """Initialize the java plugin"""
     if not check_java(cfg):
         die(
             "JDK {java.version} is not yet provisioned.\n"
@@ -89,6 +93,7 @@ def init(cfg):
 
 
 def configure(cfg):
+    """Configure the java plugin"""
     if not cfg.java.version:
         die(
             "Spin's Java plugin no longer sets a default version.\n"
