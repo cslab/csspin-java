@@ -113,7 +113,7 @@ repos:
       rev: 1.7.9
       hooks:
           - id: bandit
-            args: [--ini=pyproject.toml]
+            args: [-x=tests] # exclude tests from run
             types: [file] # override `types: [python]`
             files: \.(pyi?|ue)$
 default_language_version:

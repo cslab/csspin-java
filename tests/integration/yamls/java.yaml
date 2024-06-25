@@ -1,0 +1,8 @@
+minimum-spin: '0.2'
+plugin-packages:
+    - ../../../spin_java
+plugins:
+    - spin_java.java
+    - spin_java.mvn
+java:
+    version: '19'

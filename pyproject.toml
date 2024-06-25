@@ -16,6 +16,12 @@ maintainers = [
 name = "spin_frontend"
 requires-python = ">=3.9"
 
+[project.optional-dependencies]
+test = [
+  "cs.spin @ git+https://code.contact.de/qs/tooling/cs.spin.git",  # FIXME: pull from package-index
+  "pytest"
+]
+
 [project.urls]
 Issues = "https://code.contact.de/qs/spin/spin_java/-/issues"
 Repository = "https://code.contact.de/qs/spin/spin_java"
