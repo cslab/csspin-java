@@ -28,6 +28,7 @@ def do_test(tmpdir, what, cmd, path="tests/integration"):
     return output
 
 
+@pytest.mark.integration()
 def test_java(tmpdir):
     """The java plugin-package can be provisioned"""
     output = do_test(
