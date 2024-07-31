@@ -12,7 +12,7 @@ from spin import config, die, echo, interpolate1, memoizer, mkdir, setenv
 
 defaults = config(
     version=None,
-    install_dir="{spin.cache}/{platform.tag}",
+    install_dir="{spin.cache}",
     java_home=None,
 )
 
