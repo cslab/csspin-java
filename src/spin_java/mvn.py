@@ -12,7 +12,18 @@ import sys
 import tarfile
 import urllib
 
-from spin import config, exists, info, interpolate1, option, setenv, sh, task, warn
+from spin import (
+    Verbosity,
+    config,
+    exists,
+    info,
+    interpolate1,
+    option,
+    setenv,
+    sh,
+    task,
+    warn,
+)
 
 defaults = config(
     exe="mvn",
@@ -104,7 +115,7 @@ def mvn(
     if sys.platform.startswith("win32"):
         cmd += ".cmd"
     opts = cfg.mvn.opts
-    if not cfg.verbose:
+    if cfg.verbosity == Verbosity.QUIET:
         opts.append("-q")
     # add pom file
     opts.append("-f")
