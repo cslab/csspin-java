@@ -28,11 +28,7 @@ from spin import (
 defaults = config(
     exe="mvn",
     version="3.8.3",
-    goals=[],
-    opts=[],
-    defines={},
     pom_file="pom.xml",
-    packages=[],
     mirrors=[
         "https://ftp.fau.de/apache/",
         "https://dlcdn.apache.org/",
