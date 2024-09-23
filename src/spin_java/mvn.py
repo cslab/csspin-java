@@ -12,18 +12,7 @@ import sys
 import tarfile
 import urllib
 
-from spin import (
-    Verbosity,
-    config,
-    exists,
-    info,
-    interpolate1,
-    option,
-    setenv,
-    sh,
-    task,
-    warn,
-)
+from spin import Verbosity, config, exists, option, setenv, sh, task, warn
 
 defaults = config(
     exe="mvn",
@@ -41,14 +30,17 @@ defaults = config(
 
 def provision(cfg):
     """Provision the mvn plugin"""
-    # TODO: Maybe use cs.spin's download function
     if not exists(cfg.mvn.mavendir):
+
+        from path import Path
+        from spin import download
+
         random.shuffle(cfg.mvn.mirrors)
+        zipfile = cfg.mvn.mavendir / Path(cfg.mvn.url).basename()
+
         for mirror in cfg.mvn.mirrors:
-            url = interpolate1(mirror + cfg.mvn.url)
-            info(f"Downloading {url}")
             try:
-                filename, _ = urllib.request.urlretrieve(url)  # nosec: B310
+                download(mirror + cfg.mvn.url, zipfile)
             except urllib.error.HTTPError as e:
                 # maven removes old version from the mirrors...
                 if e.status == 404:
@@ -56,9 +48,7 @@ def provision(cfg):
                         f"Maven {cfg.mvn.version} not found in the mirrors... "
                         f"Trying to retrieve version {cfg.mvn.version} from archive."
                     )
-                    mirror = "https://archive.apache.org/dist/"
-                    url = interpolate1(mirror + cfg.mvn.url)
-                    filename, _ = urllib.request.urlretrieve(url)  # nosec: B310
+                    download(f"https://archive.apache.org/dist/{cfg.mvn.url}", zipfile)
                 else:
                     raise
             except urllib.error.URLError:
@@ -69,16 +59,14 @@ def provision(cfg):
             raise Exception(  # pylint: disable=broad-exception-raised
                 "Currently no mirror reachable"
             )
-        with tarfile.open(filename, "r:gz") as tar:
-            tar.extractall(
-                os.path.dirname(interpolate1(cfg.mvn.mavendir))
-            )  # nosec: B202
-    init(cfg)
+        with tarfile.open(zipfile, "r:gz") as tar:
+            tar.extractall(cfg.mvn.mavendir.dirname())  # nosec: B202
+        zipfile.unlink()
 
 
 def init(cfg):
     """Initialize the mvn plugin"""
-    bindir = os.path.normpath(interpolate1(f"{cfg.mvn.mavendir}/bin"))
+    bindir = (cfg.mvn.mavendir / "bin").normpath()
     setenv(
         f"set PATH={bindir}{os.pathsep}$PATH",
         PATH=os.pathsep.join((f"{bindir}", "{PATH}")),
