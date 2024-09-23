@@ -2,7 +2,7 @@
 #
 # Schema of the mvn plugin for cs.spin
 
-java:
+mvn:
     type: object
     help: Configuration regarding the mvn plugin for cs.spin
     properties:
@@ -14,19 +14,19 @@ java:
             help: Java version
         goals:
             type: list
-            help: TODO
+            help: List of goals to be executed by the mvn plugin
         opts:
             type: list
             help: Options passed to the mvn call
         defines:
             type: object
-            help: TODO
+            help: Key-value pairs for defining properties in the mvn call
         pom_file:
             type: path
-            help: TODO
+            help: Path to the pom.xml file
         packages:
             type: list
-            help: TODO
+            help: List of packages to be included in the build
         mirrors:
             type: list
             help: List of mirrors to use when pulling packages
@@ -36,16 +36,3 @@ java:
         mavendir:
             type: path
             help: Directory to store caches
-        requires:
-            type: object
-            help: Dependencies of the mvn plugin
-            properties:
-                spin:
-                    help: Spin dependencies of the mvn plugin
-
-        install_dir:
-            type: path
-            help: The directory in which JAVA should be installed
-        java_home:
-            type: path
-            help: The path to the JAVA installation path
