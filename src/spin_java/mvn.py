@@ -23,7 +23,7 @@ defaults = config(
         "https://dlcdn.apache.org/",
     ],
     url="maven/maven-3/{mvn.version}/binaries/apache-maven-{mvn.version}-bin.tar.gz",
-    mavendir="{spin.cache}/apache-maven-{mvn.version}",
+    mavendir="{spin.data}/apache-maven-{mvn.version}",
     requires=config(spin=["spin_java.java"]),
 )
 
