@@ -24,7 +24,7 @@ def cfg():
 def execute_spin(tmpdir, what, cmd, path="tests/integration"):
     """Helper to execute spin calls via spin."""
     output = backtick(
-        f"spin -p spin.cache={tmpdir} -q -C {path} --env {tmpdir} -f"
+        f"spin -p spin.data={tmpdir} -q -C {path} --env {tmpdir} -f"
         f" {what} --cleanup --provision {cmd}"
     )
     output = output.strip()
