@@ -88,7 +88,7 @@ def init(cfg):
     if not check_java(cfg):
         die(
             "JDK {java.version} is not yet provisioned.\n"
-            "You might want to run spin with the --provision flag."
+            "You might want to run 'spin provision'."
         )
 
 
