@@ -20,11 +20,11 @@ java:
 sphinx:
     build_dir: _build
 
-build-rules:
+build_rules:
     task docs:
-        sources: docs/_schemaref.rst
-    docs/_schemaref.rst:
+        sources: doc/_schemaref.rst
+    doc/_schemaref.rst:
         sources: [src/spin_java]
         spin:
-            - schemadoc mvn -o docs/plugins/mvn_schemaref.rst
-            - schemadoc java -o docs/plugins/java_schemaref.rst
+            - schemadoc mvn --rst -o doc/plugins/mvn_schemaref.rst
+            - schemadoc java --rst -o doc/plugins/java_schemaref.rst
