@@ -1,24 +1,24 @@
-# The spinfile.yaml for spin_python is required since building the documentation
+# The spinfile.yaml for spin_java is required since building the documentation
 # requires a provisioned project.
+
 plugin_packages:
     - spin_docs
     - spin_python
-    - '../spin_java'
+    - .
 
 plugins:
+    - spin_docs.sphinx
     - spin_java:
           - mvn
           - java
-    - spin_docs.sphinx
 
 python:
     version: '3.11.9'
+    requirements:
+        - sphinx-rtd-theme
 
 java:
     version: '19'
-
-sphinx:
-    build_dir: _build
 
 build_rules:
     task docs:
