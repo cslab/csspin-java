@@ -38,6 +38,10 @@ junit.xml
 cept_test_results.json
 pytest*.xml
 
+# Documentation
+doc/_build/
+doc/plugins/*_schemaref.rst
+
 # IDE configuration
 .idea/
 .vscode/
