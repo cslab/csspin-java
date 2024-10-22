@@ -50,7 +50,7 @@ After provision, the plugin can be used to execute Maven commands as follows:
 How to use a local Maven installation?
 ######################################
 
-If a local Maven installation is available, the ``mvn.mavendir`` can be
+If a local Maven installation is available, the ``mvn.install_dir`` can be
 configured to point to the installation directory. The plugin will then use the
 local installation instead of provisioning a new one.
 

@@ -23,20 +23,20 @@ defaults = config(
         "https://dlcdn.apache.org/",
     ],
     url="maven/maven-3/{mvn.version}/binaries/apache-maven-{mvn.version}-bin.tar.gz",
-    mavendir="{spin.data}/apache-maven-{mvn.version}",
+    install_dir="{spin.data}/apache-maven-{mvn.version}",
     requires=config(spin=["spin_java.java"]),
 )
 
 
 def provision(cfg):
     """Provision the mvn plugin"""
-    if not exists(cfg.mvn.mavendir):
+    if not exists(cfg.mvn.install_dir):
 
         from path import Path
         from spin import download
 
         random.shuffle(cfg.mvn.mirrors)
-        zipfile = cfg.mvn.mavendir / Path(cfg.mvn.url).basename()
+        zipfile = cfg.mvn.install_dir / Path(cfg.mvn.url).basename()
 
         for mirror in cfg.mvn.mirrors:
             try:
@@ -60,13 +60,13 @@ def provision(cfg):
                 "Currently no mirror reachable"
             )
         with tarfile.open(zipfile, "r:gz") as tar:
-            tar.extractall(cfg.mvn.mavendir.dirname())  # nosec: B202
+            tar.extractall(cfg.mvn.install_dir.dirname())  # nosec: B202
         zipfile.unlink()
 
 
 def init(cfg):
     """Initialize the mvn plugin"""
-    bindir = (cfg.mvn.mavendir / "bin").normpath()
+    bindir = (cfg.mvn.install_dir / "bin").normpath()
     setenv(
         f"set PATH={bindir}{os.pathsep}$PATH",
         PATH=os.pathsep.join((f"{bindir}", "{PATH}")),
