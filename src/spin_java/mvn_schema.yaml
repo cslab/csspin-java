@@ -33,6 +33,6 @@ mvn:
         url:
             type: str
             help: URL pointing to the mvn binary
-        mavendir:
+        install_dir:
             type: path
             help: Directory to store caches
