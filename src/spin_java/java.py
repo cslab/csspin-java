@@ -28,7 +28,9 @@ def configure(cfg):
     if cfg.java.use:
         cfg.java.java_home = cfg.java.use
     elif cfg.java.version:
-        cfg.java.java_home = Path(interpolate1(cfg.java.install_dir)) / cfg.java.version
+        cfg.java.java_home = Path(interpolate1(cfg.java.install_dir)) / str(
+            cfg.java.version
+        )
     else:
         die(
             "'spin_java.java' does not set a default version for java. "
