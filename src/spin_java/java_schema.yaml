@@ -13,5 +13,8 @@ java:
             type: path
             help: The directory in which JAVA should be installed
         java_home:
-            type: path
+            type: path internal
             help: The path to the JAVA installation path
+        use:
+            type: path
+            help: The path to an existing JAVA installation
