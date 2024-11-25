@@ -7,6 +7,7 @@
 """Implementation of the java plugin for cs.spin"""
 
 import os
+import shutil
 
 from path import Path
 from spin import config, die, echo, interpolate1, mv, setenv
@@ -26,7 +27,11 @@ def set_environment(cfg):
 def configure(cfg):
     """Configure the java plugin"""
     if cfg.java.use:
-        cfg.java.java_home = cfg.java.use
+        if java_path := shutil.which(interpolate1(cfg.java.use)):
+            # assuming java to be $JAVA_HOME/bin/java
+            cfg.java.java_home = Path(java_path).realpath().dirname().dirname()
+        else:
+            die(f"Could not find java executable '{cfg.java.use}'")
     elif cfg.java.version:
         cfg.java.java_home = Path(interpolate1(cfg.java.install_dir)) / str(
             cfg.java.version
@@ -40,7 +45,7 @@ def configure(cfg):
 
 def provision(cfg):
     """Install java if it does not exist"""
-    if not cfg.java.java_home.exists():
+    if cfg.java.version and not (cfg.java.use or cfg.java.java_home.exists()):
         from tempfile import TemporaryDirectory
 
         import jdk
