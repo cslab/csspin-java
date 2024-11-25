@@ -35,11 +35,17 @@ The provisioning of the plugin, its dependencies and Java can be done via the
 well-known ``spin provision``-command.
 
 How to use a local Java installation?
-######################################
+#####################################
 
-If a local Java installation is available, the ``java.install_dir`` can be
-configured to point to the installation directory. The plugin will then use the
-local installation instead of provisioning a new one.
+To use a local Java installation, the ``java.use`` can be leveraged as
+demonstrated below:
+
+.. code-block:: yaml
+    :caption: Using a local Java installation
+
+    spin -p java.use=java provision
+
+    spin -p java.use=java run --version
 
 ``spin_java.java`` schema reference
 ###################################
