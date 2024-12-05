@@ -12,9 +12,8 @@ import shutil
 import subprocess
 
 import pytest
-from path import Path
 
-JAVA_EXISTS = shutil.which("java")
+JAVA_EXECUTABLE = shutil.which("java")
 
 
 def execute_spin(yaml, env, path="tests/integration/yamls", cmd=""):
@@ -43,11 +42,21 @@ def test_java_provision(tmp_path):
 
 
 @pytest.mark.integration()
-@pytest.mark.skipif(not JAVA_EXISTS, reason="java not installed.")
+@pytest.mark.skipif(not JAVA_EXECUTABLE, reason="java not installed.")
 def test_java_use_provision(tmp_path):
     """Provision the java plugin but using a local java installation"""
-    yaml = "java.yaml"
+    properties_of_expected_java = subprocess.check_output(
+        [JAVA_EXECUTABLE, "-XshowSettings:properties", "-version"],
+        encoding="utf-8",
+        stderr=subprocess.STDOUT,
+    )
+    expected_java_home = [
+        line.strip().split("=")[1].strip()
+        for line in properties_of_expected_java.split("\n")
+        if "java.home" in line
+    ][0]
 
+    yaml = "java.yaml"
     execute_spin(yaml=yaml, env=tmp_path, cmd="cleanup")
     provision_log = execute_spin(
         yaml=yaml,
@@ -57,12 +66,9 @@ def test_java_use_provision(tmp_path):
     version_log = execute_spin(
         yaml=yaml,
         env=tmp_path,
-        cmd="-p java.use=java run java --version",
+        cmd="-p java.use=java run java -XshowSettings:properties -version",
     )
 
-    expected_java_home = (
-        f"JAVA_HOME={Path(shutil.which('java')).realpath().dirname().dirname()}"
-    )
     assert expected_java_home in provision_log
     assert expected_java_home in version_log
 
