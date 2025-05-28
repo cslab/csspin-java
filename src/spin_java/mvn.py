@@ -12,7 +12,10 @@ import sys
 import tarfile
 import urllib
 
-from spin import Verbosity, config, exists, option, setenv, sh, task, warn
+try:
+    from csspin import Verbosity, config, exists, option, setenv, sh, task, warn
+except ImportError:
+    from spin import Verbosity, config, exists, option, setenv, sh, task, warn
 
 defaults = config(
     exe="mvn",
@@ -33,7 +36,11 @@ def provision(cfg):
     if not exists(cfg.mvn.install_dir):
 
         from path import Path
-        from spin import download
+
+        try:
+            from csspin import download
+        except ImportError:
+            from spin import download
 
         random.shuffle(cfg.mvn.mirrors)
         zipfile = cfg.mvn.install_dir / Path(cfg.mvn.url).basename()
