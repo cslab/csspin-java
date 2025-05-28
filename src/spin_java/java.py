@@ -10,7 +10,11 @@ import os
 import shutil
 
 from path import Path
-from spin import config, die, echo, interpolate1, mv, setenv
+
+try:
+    from csspin import config, die, echo, interpolate1, mv, setenv
+except ImportError:
+    from spin import config, die, echo, interpolate1, mv, setenv
 
 defaults = config(install_dir="{spin.data}/java")
 
