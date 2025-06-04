@@ -19,7 +19,7 @@ except ImportError:
 
 defaults = config(
     exe="mvn",
-    version="3.8.3",
+    version="3.9.9",
     pom_file="pom.xml",
     mirrors=[
         "https://ftp.fau.de/apache/",
