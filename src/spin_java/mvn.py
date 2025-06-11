@@ -92,6 +92,12 @@ def provision(cfg):
         with tarfile.open(zipfile, "r:gz") as tar:
             tar.extractall(cfg.mvn.install_dir.dirname())  # nosec: B202
         zipfile.unlink()
+    else:
+        try:
+            from csspin import debug
+        except ImportError:
+            from spin import debug
+        debug(f"Using cached Apache Maven: {cfg.mvn.install_dir}.")
 
 
 def init(cfg):
