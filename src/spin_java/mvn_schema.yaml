@@ -33,6 +33,9 @@ mvn:
         url:
             type: str
             help: URL pointing to the mvn binary
+        use:
+            type: str
+            help: Use a local Apache Maven installation
         install_dir:
             type: path
             help: Directory to store caches

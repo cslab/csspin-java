@@ -11,6 +11,7 @@ import random
 import sys
 import tarfile
 import urllib
+from shutil import which
 
 try:
     from csspin import Verbosity, config, exists, option, setenv, sh, task, warn
@@ -31,9 +32,31 @@ defaults = config(
 )
 
 
+def _get_mvn_use_exe(use: str) -> str:  # pylint: disable=inconsistent-return-statements
+    """Get the absolute path of the Apache Maven executable to use."""
+    try:
+        from csspin import debug, die
+    except ImportError:
+        from spin import debug, die
+
+    if exec_path := which(use):
+        debug(f"Using Apache Maven executable '{use}' found at '{exec_path}'.")
+        return exec_path
+
+    abs_path = os.path.abspath(use)
+    if exec_path is None and os.path.exists(abs_path):
+        debug(f"Using Apache Maven executable '{use}' found at '{abs_path}'.")
+        return abs_path
+    die(f"Could not find Apache Maven executable '{use}'.")
+
+
 def provision(cfg):
     """Provision the mvn plugin"""
-    if not exists(cfg.mvn.install_dir):
+
+    if cfg.mvn.use:
+        _get_mvn_use_exe(cfg.mvn.use)  # Ensure the executable is available
+
+    elif not exists(cfg.mvn.install_dir):
 
         from path import Path
 
@@ -73,11 +96,16 @@ def provision(cfg):
 
 def init(cfg):
     """Initialize the mvn plugin"""
-    bindir = (cfg.mvn.install_dir / "bin").normpath()
-    setenv(
-        f"set PATH={bindir}{os.pathsep}$PATH",
-        PATH=os.pathsep.join((f"{bindir}", "{PATH}")),
-    )
+
+    if cfg.mvn.use:
+        if which(cfg.mvn.use) is None:
+            setenv(PATH=os.pathsep.join((f"{_get_mvn_use_exe(cfg.mvn.use)}", "{PATH}")))
+    else:
+        setenv(
+            PATH=os.pathsep.join(
+                (f"{(cfg.mvn.install_dir / 'bin').normpath()}", "{PATH}")
+            )
+        )
 
 
 @task(when="build")
