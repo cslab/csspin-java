@@ -14,6 +14,7 @@ import subprocess
 import pytest
 
 JAVA_EXECUTABLE = shutil.which("java")
+MVN_EXECUTABLE = shutil.which("mvn")
 
 
 def execute_spin(yaml, env, path="tests/integration/yamls", cmd=""):
@@ -71,6 +72,42 @@ def test_java_use_provision(tmp_path):
 
     assert expected_java_home in provision_log
     assert expected_java_home in version_log
+
+
+@pytest.mark.integration()
+@pytest.mark.skipif(not MVN_EXECUTABLE, reason="mvn not installed.")
+def test_mvn_use_provision(tmp_path):
+    """Provision the mvn plugin but using a local mvn installation"""
+
+    properties_of_expected_mvn = subprocess.check_output(
+        [MVN_EXECUTABLE, "-version"],
+        encoding="utf-8",
+        stderr=subprocess.STDOUT,
+    )
+    expected_mvn_home = [
+        line.strip().split(":")[1].strip()
+        for line in properties_of_expected_mvn.split("\n")
+        if "Maven home:" in line
+    ][0]
+
+    yaml = "mvn.yaml"
+    execute_spin(yaml=yaml, env=tmp_path, cmd="cleanup")
+    provision_log = execute_spin(
+        yaml=yaml,
+        env=tmp_path,
+        cmd="-vv -p mvn.use=mvn provision",
+    )
+    version_log = execute_spin(
+        yaml=yaml,
+        env=tmp_path,
+        cmd="-p mvn.use=mvn run mvn --version",
+    )
+
+    assert (
+        f"Using Apache Maven executable 'mvn' found at '{MVN_EXECUTABLE}'"
+        in provision_log
+    )
+    assert expected_mvn_home in version_log
 
 
 @pytest.mark.integration()
