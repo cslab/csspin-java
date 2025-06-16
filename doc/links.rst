@@ -14,22 +14,4 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-csspin-java documentation
-=========================
-
-The ``csspin-java`` plugin-package for `csspin`_ serves to provide the necessary
-plugins and tools for developing Java-based projects.
-
-.. The sources can be found at https://code.contact.de/qs/spin/csspin_java, while
-.. the released versions are available at
-.. https://packages.contact.de/tools/misc/spin-java.
-
-``csspin-java`` requires at least Python 3.9.
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   installation.rst
-   plugins/java.rst
-   plugins/mvn.rst
+.. _csspin: https://pypi.org/project/csspin/

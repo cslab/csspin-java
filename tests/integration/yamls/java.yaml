@@ -1,6 +1,6 @@
 plugin_packages:
     - ../../..
 plugins:
-    - spin_java.java
+    - csspin_java.java
 java:
     version: '19'

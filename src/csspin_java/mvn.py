@@ -3,8 +3,20 @@
 # Copyright (C) 2020 CONTACT Software GmbH
 # All rights reserved.
 # https://www.contact-software.com/
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-"""Module implementing the mvn plugin for cs.spin"""
+"""Module implementing the mvn plugin for csspin"""
 
 import os
 import random
@@ -13,10 +25,7 @@ import tarfile
 import urllib
 from shutil import which
 
-try:
-    from csspin import Verbosity, config, exists, option, setenv, sh, task, warn
-except ImportError:
-    from spin import Verbosity, config, exists, option, setenv, sh, task, warn
+from csspin import Verbosity, config, exists, option, setenv, sh, task, warn
 
 defaults = config(
     exe="mvn",
@@ -28,7 +37,7 @@ defaults = config(
     ],
     url="maven/maven-3/{mvn.version}/binaries/apache-maven-{mvn.version}-bin.tar.gz",
     install_dir="{spin.data}/apache-maven-{mvn.version}",
-    requires=config(spin=["spin_java.java"]),
+    requires=config(spin=["csspin_java.java"]),
 )
 
 
@@ -58,12 +67,8 @@ def provision(cfg):
 
     elif not exists(cfg.mvn.install_dir):
 
+        from csspin import download
         from path import Path
-
-        try:
-            from csspin import download
-        except ImportError:
-            from spin import download
 
         random.shuffle(cfg.mvn.mirrors)
         zipfile = cfg.mvn.install_dir / Path(cfg.mvn.url).basename()

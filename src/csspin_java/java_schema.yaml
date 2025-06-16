@@ -1,10 +1,10 @@
 # -*- mode: yaml; coding: utf-8 -*-
 #
-# Schema of the java plugin for cs.spin
+# Schema of the java plugin for csspin
 
 java:
     type: object
-    help: Configuration regarding the java plugin for cs.spin
+    help: Configuration regarding the java plugin for csspin
     properties:
         version:
             type: str
