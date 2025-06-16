@@ -1,20 +1,28 @@
 # -*- mode: python; coding: utf-8 -*-
 #
 # Copyright (C) 2021 CONTACT Software GmbH
-# All rights reserved.
 # https://www.contact-software.com/
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-"""Implementation of the java plugin for cs.spin"""
+
+"""Implementation of the java plugin for csspin"""
 
 import os
 import shutil
 
+from csspin import config, die, echo, interpolate1, mv, setenv
 from path import Path
-
-try:
-    from csspin import config, die, echo, interpolate1, mv, setenv
-except ImportError:
-    from spin import config, die, echo, interpolate1, mv, setenv
 
 defaults = config(install_dir="{spin.data}/java")
 
@@ -42,7 +50,7 @@ def configure(cfg):
         )
     else:
         die(
-            "'spin_java.java' does not set a default version for java. "
+            "'csspin_java.java' does not set a default version for java. "
             "Set either 'java.version' or 'java.use'."
         )
 

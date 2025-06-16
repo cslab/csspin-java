@@ -1,5 +1,4 @@
 -e .
 pytest
 pytest-cov
-# FIXME: Uncomment the following line as soon as csspin is available on PyPI
-# csspin
+csspin

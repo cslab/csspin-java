@@ -1,10 +1,10 @@
 # -*- mode: yaml; coding: utf-8 -*-
 #
-# Schema of the mvn plugin for cs.spin
+# Schema of the mvn plugin for csspin
 
 mvn:
     type: object
-    help: Configuration regarding the mvn plugin for cs.spin
+    help: Configuration regarding the mvn plugin for csspin
     properties:
         exe:
             type: path

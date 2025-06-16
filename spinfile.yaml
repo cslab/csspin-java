@@ -1,17 +1,18 @@
-# The spinfile.yaml for spin_java is required since building the documentation
+# The spinfile.yaml for csspin_java is required since building the documentation
 # requires a provisioned project.
 
 spin:
+    project_name: csspin_java
     index_url: https://packages.contact.de/tools/stable
 
 plugin_packages:
-    - spin_docs
-    - spin_python
+    - spin-docs
+    - spin-python
     - -e .
 
 plugins:
     - spin_docs.sphinx
-    - spin_java:
+    - csspin_java:
           - mvn
           - java
 
@@ -27,7 +28,7 @@ build_rules:
     task docs:
         sources: doc/_schemaref.rst
     doc/_schemaref.rst:
-        sources: [src/spin_java]
+        sources: [src/csspin_java]
         spin:
             - schemadoc mvn --rst -o doc/plugins/mvn_schemaref.rst
             - schemadoc java --rst -o doc/plugins/java_schemaref.rst
