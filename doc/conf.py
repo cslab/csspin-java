@@ -25,7 +25,7 @@ from pathlib import Path
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "csspin_java"
+project = "csspin-java"
 copyright = "2024, CONTACT Software GmbH"  # pylint: disable=redefined-builtin
 author = "CONTACT Software GmbH"
 

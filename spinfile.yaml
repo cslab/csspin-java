@@ -6,12 +6,12 @@ spin:
     index_url: https://packages.contact.de/tools/stable
 
 plugin_packages:
-    - spin-docs
-    - spin-python
+    - csspin-docs
+    - csspin-python
     - -e .
 
 plugins:
-    - spin_docs.sphinx
+    - csspin_docs.sphinx
     - csspin_java:
           - mvn
           - java
