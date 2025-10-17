@@ -19,21 +19,33 @@
 """Module implementing the mvn plugin for csspin"""
 
 import os
-import random
 import sys
 import tarfile
 import urllib
 from shutil import which
 
-from csspin import Verbosity, config, exists, option, setenv, sh, task, warn
+from csspin import (
+    Verbosity,
+    config,
+    debug,
+    die,
+    download,
+    exists,
+    option,
+    setenv,
+    sh,
+    task,
+    warn,
+)
+from path import Path
 
 defaults = config(
     exe="mvn",
     version="3.9.10",
     pom_file="pom.xml",
     mirrors=[
-        "https://ftp.fau.de/apache/",
-        "https://dlcdn.apache.org/",
+        "https://downloads.apache.org",
+        "https://archive.apache.org/dist/",
     ],
     url="maven/maven-3/{mvn.version}/binaries/apache-maven-{mvn.version}-bin.tar.gz",
     install_dir="{spin.data}/apache-maven-{mvn.version}",
@@ -43,11 +55,6 @@ defaults = config(
 
 def _get_mvn_use_exe(use: str) -> str:  # pylint: disable=inconsistent-return-statements
     """Get the absolute path of the Apache Maven executable to use."""
-    try:
-        from csspin import debug, die
-    except ImportError:
-        from spin import debug, die
-
     if exec_path := which(use):
         debug(f"Using Apache Maven executable '{use}' found at '{exec_path}'.")
         return exec_path
@@ -66,42 +73,30 @@ def provision(cfg):
         _get_mvn_use_exe(cfg.mvn.use)  # Ensure the executable is available
 
     elif not exists(cfg.mvn.install_dir):
-
-        from csspin import download
-        from path import Path
-
-        random.shuffle(cfg.mvn.mirrors)
         zipfile = cfg.mvn.install_dir / Path(cfg.mvn.url).basename()
 
         for mirror in cfg.mvn.mirrors:
+            if mirror[-1] == "/":
+                url = f"{mirror}{cfg.mvn.url}"
+            else:
+                url = f"{mirror}/{cfg.mvn.url}"
             try:
-                download(mirror + cfg.mvn.url, zipfile)
-            except urllib.error.HTTPError as e:
-                # maven removes old version from the mirrors...
-                if e.status == 404:
-                    warn(
-                        f"Maven {cfg.mvn.version} not found in the mirrors... "
-                        f"Trying to retrieve version {cfg.mvn.version} from archive."
-                    )
-                    download(f"https://archive.apache.org/dist/{cfg.mvn.url}", zipfile)
-                else:
-                    raise
-            except urllib.error.URLError:
-                warn(f"Mirror {mirror} currently not reachable...")
+                download(url, zipfile)
+                break
+            except urllib.error.HTTPError:
+                warn(f"Maven {cfg.mvn.version} not found at {url}")
                 continue
-            break
+            except urllib.error.URLError:
+                warn(f"Mirror {mirror} currently not reachable")
+                continue
         else:
-            raise Exception(  # pylint: disable=broad-exception-raised
-                "Currently no mirror reachable"
+            die(  # pylint: disable=broad-exception-raised
+                "Could not download Apache Maven from any of the mirrors."
             )
         with tarfile.open(zipfile, "r:gz") as tar:
             tar.extractall(cfg.mvn.install_dir.dirname())  # nosec: B202
         zipfile.unlink()
     else:
-        try:
-            from csspin import debug
-        except ImportError:
-            from spin import debug
         debug(f"Using cached Apache Maven: {cfg.mvn.install_dir}.")
 
 
