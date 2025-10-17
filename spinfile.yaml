@@ -27,6 +27,8 @@ mvn:
     mirrors:
         - https://apache-proxy.ops.contact.de
         - https://apache-proxy.ops.contact.de/dist
+        - https://downloads.apache.org
+        - https://archive.apache.org/dist
 
 build_rules:
     task docs:
