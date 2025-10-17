@@ -23,6 +23,11 @@ python:
 java:
     version: '19'
 
+mvn:
+    mirrors:
+        - https://apache-proxy.ops.contact.de
+        - https://apache-proxy.ops.contact.de/dist
+
 build_rules:
     task docs:
         sources: doc/_schemaref.rst

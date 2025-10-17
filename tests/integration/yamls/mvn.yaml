@@ -4,3 +4,7 @@ plugins:
     - csspin_java.mvn
 java:
     version: '19'
+mvn:
+    mirrors:
+        - https://apache-proxy.ops.contact.de
+        - https://apache-proxy.ops.contact.de/dist
