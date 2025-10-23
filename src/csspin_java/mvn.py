@@ -70,6 +70,7 @@ def provision(cfg):
     """Provision the mvn plugin"""
 
     if cfg.mvn.use:
+        warn(f"mvn.version will be ignored, since mvn.use is set to '{cfg.mvn.use}'")
         _get_mvn_use_exe(cfg.mvn.use)  # Ensure the executable is available
 
     elif not exists(cfg.mvn.install_dir):

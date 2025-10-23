@@ -21,7 +21,7 @@
 import os
 import shutil
 
-from csspin import config, die, echo, interpolate1, mv, setenv
+from csspin import config, die, echo, interpolate1, mv, setenv, warn
 from path import Path
 
 defaults = config(install_dir="{spin.data}/java")
@@ -39,6 +39,7 @@ def set_environment(cfg):
 def configure(cfg):
     """Configure the java plugin"""
     if cfg.java.use:
+        warn(f"java.version will be ignored, since java.use is set to '{cfg.java.use}'")
         if java_path := shutil.which(interpolate1(cfg.java.use)):
             # assuming java to be $JAVA_HOME/bin/java
             cfg.java.java_home = Path(java_path).realpath().dirname().dirname()
