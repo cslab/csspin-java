@@ -31,6 +31,7 @@ from csspin import (
     die,
     download,
     exists,
+    mv,
     option,
     setenv,
     sh,
@@ -48,7 +49,7 @@ defaults = config(
         "https://archive.apache.org/dist/",
     ],
     url="maven/maven-3/{mvn.version}/binaries/apache-maven-{mvn.version}-bin.tar.gz",
-    install_dir="{spin.data}/apache-maven-{mvn.version}",
+    install_dir="{spin.data}/apache-maven/{mvn.version}",
     requires=config(spin=["csspin_java.java"]),
 )
 
@@ -74,8 +75,7 @@ def provision(cfg):
         _get_mvn_use_exe(cfg.mvn.use)  # Ensure the executable is available
 
     elif not exists(cfg.mvn.install_dir):
-        zipfile = cfg.mvn.install_dir / Path(cfg.mvn.url).basename()
-
+        zipfile = cfg.mvn.install_dir.dirname() / Path(cfg.mvn.url).basename()
         for mirror in cfg.mvn.mirrors:
             if mirror[-1] == "/":
                 url = f"{mirror}{cfg.mvn.url}"
@@ -95,7 +95,9 @@ def provision(cfg):
                 "Could not download Apache Maven from any of the mirrors."
             )
         with tarfile.open(zipfile, "r:gz") as tar:
-            tar.extractall(cfg.mvn.install_dir.dirname())  # nosec: B202
+            extract_dir = cfg.mvn.install_dir.dirname()
+            tar.extractall(extract_dir)  # nosec: B202
+            mv(extract_dir / f"apache-maven-{cfg.mvn.version}", cfg.mvn.install_dir)
         zipfile.unlink()
     else:
         debug(f"Using cached Apache Maven: {cfg.mvn.install_dir}.")
