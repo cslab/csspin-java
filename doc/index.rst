@@ -33,3 +33,4 @@ plugins and tools for developing Java-based projects.
    installation.rst
    plugins/java.rst
    plugins/mvn.rst
+   relnotes.rst
