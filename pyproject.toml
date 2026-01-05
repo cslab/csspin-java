@@ -33,7 +33,11 @@ name = "csspin_java"
 requires-python = ">=3.9"
 
 [project.urls]
-Homepage = "https://contact-software.com"
+"CONTACT Software GmbH" = "https://contact-software.com"
+Documentation = "https://csspin-java.readthedocs.io/en/stable/"
+"Issue Tracker" = "https://github.com/cslab/csspin-java/issues"
+"Release Notes" = "https://csspin-java.readthedocs.io/en/stable/relnotes.html"
+Repository = "https://github.com/cslab/csspin-java"
 
 [tool.coverage.report]
 include = ["src/csspin_java/*"]
