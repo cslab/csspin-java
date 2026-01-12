@@ -20,11 +20,10 @@ csspin-java documentation
 The ``csspin-java`` plugin-package for `csspin`_ serves to provide the necessary
 plugins and tools for developing Java-based projects.
 
-.. The sources can be found at https://code.contact.de/qs/spin/csspin_java, while
-.. the released versions are available at
-.. https://packages.contact.de/tools/misc/spin-java.
+The sources can be found at https://github.com/cslab/csspin-java, while the
+released versions are available at https://pypi.org/project/csspin-java/.
 
-``csspin-java`` requires at least Python 3.9.
+``csspin-java`` requires at least Python 3.10.
 
 .. toctree::
    :maxdepth: 2
