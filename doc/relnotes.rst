@@ -52,7 +52,7 @@
     Chores
     ------
 
-    - Add release notes to the documentation structure (`#27 <https://code.contact.de/qs/spin/spin_java/-/issues/27>`_)
+    - Add release notes to the documentation structure (`#27 <https://code.contact.de/pod/components/csspin-java/-/issues/27>`_)
 
 =============
 Release Notes
@@ -66,4 +66,4 @@ Upcoming Release
 Chores
 ------
 
-- Add release notes to the documentation structure (`#27 <https://code.contact.de/qs/spin/spin_java/-/issues/27>`_)
+- Add release notes to the documentation structure (`#27 <https://code.contact.de/pod/components/csspin-java/-/issues/27>`_)
