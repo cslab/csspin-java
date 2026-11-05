@@ -11,7 +11,7 @@ mvn:
             help: The mvn executable
         version:
             type: str
-            help: Java version
+            help: Version of Apache Maven to provision
         goals:
             type: list
             help: List of goals to be executed by the mvn plugin
@@ -29,10 +29,14 @@ mvn:
             help: List of packages to be included in the build
         mirrors:
             type: list
-            help: List of mirrors to use when pulling packages
+            help: |
+                Base URLs to download the Maven distribution from, tried in
+                order. The plugin appends ``mvn.url`` to each one.
         url:
             type: str
-            help: URL pointing to the mvn binary
+            help: |
+                Path of the Maven distribution archive (``.tar.gz``) below
+                each entry of ``mvn.mirrors``
         use:
             type: str
             help: Use a local Apache Maven installation

@@ -142,7 +142,7 @@ def mvn(
     cmd = "{mvn.exe}"
     if sys.platform.startswith("win32"):
         cmd += ".cmd"
-    opts = cfg.mvn.opts
+    opts = list(cfg.mvn.opts)
     if cfg.verbosity == Verbosity.QUIET:
         opts.append("-q")
     # add pom file
