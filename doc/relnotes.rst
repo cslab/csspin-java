@@ -58,12 +58,45 @@
 Release Notes
 =============
 
-Upcoming Release
-================
+v3.0.0
+======
 
-.. Month Day, Year
+November 09, 2026
+
+Breaking Changes
+----------------
+
+- Drop Python 3.9 support (`#31
+  <https://code.contact.de/pod/components/csspin-java/-/issues/31>`_)
+
+Bug Fixes
+---------
+
+- Fix ``mvn`` help texts and stop mutating ``mvn.opts`` (`#34
+  <https://code.contact.de/pod/components/csspin-java/-/issues/34>`_)
 
 Chores
 ------
 
 - Add release notes to the documentation structure (`#27 <https://code.contact.de/pod/components/csspin-java/-/issues/27>`_)
+- Warn when ``java.use`` and ``java.version`` are both set, same for ``mvn`` (`#25
+  <https://code.contact.de/pod/components/csspin-java/-/issues/25>`_)
+- Change the default Apache Maven install directory to
+  ``{spin.data}/apache-maven/<version>`` (`#28
+  <https://code.contact.de/pod/components/csspin-java/-/issues/28>`_)
+- Add repository URL to the wheel metadata (`#29
+  <https://code.contact.de/pod/components/csspin-java/-/issues/29>`_)
+- Update release process documentation and contribution guideline (`#30
+  <https://code.contact.de/pod/components/csspin-java/-/issues/30>`_)
+- Document CONTACT Community as release notification channel (`#32
+  <https://code.contact.de/pod/components/csspin-java/-/issues/32>`_)
+- Add SonarQube analysis (`!44
+  <https://code.contact.de/pod/components/csspin-java/-/merge_requests/44>`_)
+- Update CI includes and stale references after move to ``pod/components`` (`!45
+  <https://code.contact.de/pod/components/csspin-java/-/merge_requests/45>`_)
+- Add CEDM component portfolio update to release procedure (`!46
+  <https://code.contact.de/pod/components/csspin-java/-/merge_requests/46>`_)
+- Fix toml formatting (`!47
+  <https://code.contact.de/pod/components/csspin-java/-/merge_requests/47>`_)
+- Run Linux CI on Python 3.11 instead of 3.10 (`#35
+  <https://code.contact.de/pod/components/csspin-java/-/issues/35>`_)
