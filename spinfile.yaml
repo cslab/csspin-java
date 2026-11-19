@@ -21,7 +21,7 @@ python:
         - sphinx-rtd-theme
 
 java:
-    version: '19'
+    version: '25'
 
 mvn:
     mirrors:
