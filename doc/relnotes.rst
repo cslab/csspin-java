@@ -58,6 +58,18 @@
 Release Notes
 =============
 
+v3.1.0
+======
+
+November 19, 2026
+
+Enhancements
+------------
+
+- Let the java plugin update the provisioned Java at most once per day and
+  major version (`!52
+  <https://code.contact.de/pod/components/csspin-java/-/merge_requests/52>`_)
+
 v3.0.0
 ======
 
