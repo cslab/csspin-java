@@ -19,7 +19,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Topic :: Software Development"
 ]
-dependencies = ["install-jdk"]
+dependencies = ["install-jdk", "requests"]
 description = "Plugin-package for csspin providing Java related plugins"
 dynamic = ["version", "readme"]
 license = "Apache-2.0"

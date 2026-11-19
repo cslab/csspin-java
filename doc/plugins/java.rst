@@ -45,6 +45,18 @@ at least contain the following configuration.
 The provisioning of the plugin, its dependencies and Java can be done via the
 well-known ``spin provision``-command.
 
+How is Java kept up to date?
+############################
+
+An already provisioned Java is checked for a newer release during
+``spin provision``, at most once per day and ``java.version``. A HEAD request
+resolves the latest release of the configured version, which is compared with
+the output of ``java --version``. If they differ, the new release is downloaded
+and replaces the installed one.
+
+If the latest release cannot be determined, e.g. because of a missing network
+connection, a warning is emitted and the installed Java is kept.
+
 How to use a local Java installation?
 #####################################
 
